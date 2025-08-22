@@ -1,0 +1,52 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" aria-labelledby="title desc" role="img">
+  <title>Reddut Mascot</title>
+  <desc>A friendly, original chat-creature mascot with a sprout on top. Not affiliated with Reddit.</desc>
+
+  <!-- Palette -->
+  <!-- Coral: #E94E77 | Dark: #2E2E2E | Blush: #FFD6E0 -->
+
+  <defs>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity=".15"></feDropShadow>
+    </filter>
+  </defs>
+
+  <!-- Head tail (chat bubble vibe) -->
+  <g filter="url(#softShadow)">
+    <path d="M76 98
+             q-18 -12 -24 -16
+             q 12 0 20 -6" fill="none" stroke="#E94E77" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"></path>
+    <!-- Head -->
+    <circle cx="128" cy="92" r="44" fill="white" stroke="#E94E77" stroke-width="8"></circle>
+  </g>
+
+  <!-- Sprout on top (distinct from Reddit’s antenna) -->
+  <g>
+    <path d="M128 48 L128 34" stroke="#E94E77" stroke-width="8" stroke-linecap="round"></path>
+    <ellipse cx="138" cy="30" rx="12" ry="7" fill="#E94E77" transform="rotate(-12 138 30)"></ellipse>
+    <ellipse cx="118" cy="30" rx="12" ry="7" fill="#E94E77" transform="rotate(12 118 30)"></ellipse>
+  </g>
+
+  <!-- Face -->
+  <circle cx="114" cy="92" r="6" fill="#2E2E2E"></circle>
+  <circle cx="142" cy="92" r="6" fill="#2E2E2E"></circle>
+  <path d="M112 108 q16 12 32 0" fill="none" stroke="#2E2E2E" stroke-width="6" stroke-linecap="round"></path>
+
+  <!-- Cheeks -->
+  <circle cx="98" cy="100" r="7" fill="#FFD6E0" opacity="0.9"></circle>
+  <circle cx="158" cy="100" r="7" fill="#FFD6E0" opacity="0.9"></circle>
+
+  <!-- Body -->
+  <g filter="url(#softShadow)">
+    <rect x="96" y="136" width="64" height="54" rx="22" fill="white" stroke="#E94E77" stroke-width="8"></rect>
+  </g>
+
+  <!-- Arms -->
+  <path d="M96 158 q-12 0 -18 8" fill="none" stroke="#E94E77" stroke-width="8" stroke-linecap="round"></path>
+  <path d="M160 158 q12 0 18 8" fill="none" stroke="#E94E77" stroke-width="8" stroke-linecap="round"></path>
+
+  <!-- Feet -->
+  <ellipse cx="112" cy="198" rx="10" ry="6" fill="#E94E77"></ellipse>
+  <ellipse cx="144" cy="198" rx="10" ry="6" fill="#E94E77"></ellipse>
+</svg>

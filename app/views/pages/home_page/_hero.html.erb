@@ -1,0 +1,25 @@
+<!-- app/views/pages/home_page/_hero.html.erb -->
+<section class="relative bg-orange-600">
+  <div class="mx-auto max-w-7xl px-6 py-12 sm:py-16 md:py-20 grid grid-cols-1 sm:grid-cols-2 items-center gap-10">
+    
+    <!-- Left: text -->
+    <div class="text-center sm:text-left py-20">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-black">
+        The heart of the internet
+      </h1>
+      <p class="mt-6 text-xl text-white max-w-xl mx-auto sm:mx-0 font-bold">
+        Reddit is home to thousands of communities, endless conversation, and authentic human connection.
+         Whether you're into breaking news, sports, TV fan theories, or a never-ending stream of the internet's 
+         cutest animals, there's a community on Reddut for you.
+      </p>
+    </div>
+
+    <!-- Right: mascot -->
+    <div class="flex justify-center sm:justify-end">
+      <%= image_tag "reddut_mascot.svg",
+            alt: "Reddut mascot",
+            class: "block w-120 h-auto drop-shadow-lg" %>
+    </div>
+  </div>
+</section>
+

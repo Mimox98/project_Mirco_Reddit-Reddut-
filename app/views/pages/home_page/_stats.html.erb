@@ -1,0 +1,32 @@
+<!-- app/views/pages/home_page/_stats.html.erb -->
+<section class="bg-black py-20" data-controller="count-up" data-count-up-duration-value="1400">
+  <div class="mx-auto max-w-7xl px-6">
+    <h2 class="text-5xl font-bold text-white text-center">Reddut by the numbers</h2>
+    <p class="mt-4 text-lg text-gray-300 text-center max-w-3xl mx-auto">
+      Reddut is a growing family of millions of diverse people sharing the things they care about most.
+    </p>
+    <p class="mt-2 text-sm text-gray-400 text-center">
+      As of <%= Date.today.strftime("%B %-d, %Y") %>
+    </p>
+
+    <dl class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <% stats = [
+        {label: "Daily active uniques", value: 110_000_000, format: "abbr-plus"},
+        {label: "Weekly active uniques", value: 416_000_000, format: "abbr-plus"},
+        {label: "Active communities", value: 100_000, format: "abbr-plus"},
+        {label: "Posts & comments", value: 22_000_000_000, format: "abbr-plus"}
+      ] %>
+
+      <% stats.each do |s| %>
+        <div class="rounded-xl bg-white p-8 shadow text-center">
+          <dd
+            class="mt-2 text-3xl font-extrabold tabular-nums text-orange-500"
+            data-count-up-target="stat"
+            data-countup="<%= s[:value] %>"
+            data-format="<%= s[:format] %>">0</dd>
+          <dt class="mt-2 text-sm text-black font-bold"><%= s[:label] %></dt>
+        </div>
+      <% end %>
+    </dl>
+  </div>
+</section>

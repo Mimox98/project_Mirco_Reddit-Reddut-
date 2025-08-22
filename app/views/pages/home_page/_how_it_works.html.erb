@@ -1,0 +1,74 @@
+<!-- app/views/pages/home_page/how_it_works.html.erb -->
+<section class="relative bg-white"> 
+  <div class="mx-auto max-w-7xl px-6 py-16">
+    <!-- header -->
+    <div class="text-center">
+      <h2 class="text-5xl sm:text-4xl font-bold text-gray-900">How does Reddut work?</h2>
+      <p class="mt-3 text-lg text-black">
+        Every day, millions of people around the world post, vote, and comment in communities organized around their interests.
+      </p>
+    </div>
+
+    <!-- rows stack with reliable gaps -->
+  <div class="mt-16 grid grid-cols-1 gap-y-20">  
+
+  <!-- Row 1: text left, image right -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-6 sm:gap-12">
+    <!-- Text -->
+    <div class="sm:ml-12 lg:ml-40">
+      <h3 class="text-3xl sm:text-4xl font-extrabold">Post</h3>
+      <p class="mt-4 text-lg sm:text-xl leading-relaxed text-black max-w-prose">
+        Share stories, links, images, and videos.
+      </p>
+    </div>
+    <!-- Image -->
+    <div class="flex justify-center sm:justify-center">
+      <div class="rounded-3xl bg-orange-600 p-6 shadow-lg">
+        <%= image_tag "post.png",
+              alt: "Posting on Reddut",
+              class: "block h-56 sm:h-64 md:h-72 w-auto object-contain rounded-2xl shadow-xl" %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: image left, text right -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-6 sm:gap-12">
+    <!-- Image -->
+    <div class="order-last sm:order-first flex justify-center sm:justify-center">
+      <div class="rounded-3xl bg-teal-400 p-6 shadow-lg">
+        <%= image_tag "comment.png",
+              alt: "Commenting on Reddut",
+              class: "block h-56 sm:h-64 md:h-72 w-auto object-contain rounded-2xl shadow-xl" %>
+      </div>
+    </div>
+    <!-- Text -->
+    <div class="order-first sm:order-last">
+      <h3 class="text-3xl sm:text-4xl font-extrabold">Comment</h3>
+      <p class="mt-4 text-lg sm:text-xl leading-relaxed text-black max-w-prose">
+        Discuss and add context (often with humor).
+      </p>
+    </div>
+  </div>
+
+  <!-- Row 3: text left, image right -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-6 sm:gap-12">
+    <!-- Text -->
+    <div class="sm:ml-12 lg:ml-40">
+      <h3 class="text-3xl sm:text-4xl font-extrabold">Vote</h3>
+      <p class="mt-4 text-lg sm:text-xl leading-relaxed text-black max-w-prose">
+        Upvotes & downvotes surface the best stuff.
+      </p>
+    </div>
+    <!-- Image -->
+    <div class="flex justify-center sm:justify-center">
+      <div class="rounded-3xl bg-purple-500 p-6 shadow-lg">
+        <%= image_tag "vote.png",
+              alt: "Voting on Reddut",
+              class: "block h-56 sm:h-64 md:h-72 w-auto object-contain rounded-2xl shadow-xl" %>
+      </div>
+    </div>
+  </div>
+
+  </div>
+  </div>
+</section>

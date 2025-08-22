@@ -1,0 +1,76 @@
+<!-- app/views/pages/home_page/_news.html.erb -->
+<section class="mx-auto max-w-7xl px-6 py-20">
+  <h2 class="text-3xl font-bold">Reddut news</h2>
+
+  <div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <% items = [
+      {title: "Reddut Officially Joins Russell 3000® and 1000® Indexes", date: "2025-06-30", type: :logo},
+      {title: "Legend Mohamed Farag Named Brand Ambassador for Reddut", date: "2025-06-18", type: :orange_card, name: "Mohamed Farag"},
+      {title: "Live from Cannes Lions 2025: Introducing Reddut Community Intelligence™", date: "2025-06-16", type: :pink_card},
+      {title: "The Reddut Ripple Effect: New Research Reveals That Community Conversations Drive Purchase Decisions", date: "2025-06-11", type: :yellow_card}
+    ] %>
+
+    <% items.each do |n| %>
+      <div class="block group cursor-pointer">
+        <% if n[:type] == :logo %>
+          <!-- Black logo card -->
+          <div class="flex items-center justify-center rounded-2xl bg-black h-48 transition-transform duration-300 group-hover:scale-105">
+            <%= render "shared/reddut_logo", class_name: "h-14 w-auto" %>
+          </div>
+
+        <% elsif n[:type] == :orange_card %>
+          <!-- Orange hero card -->
+          <div class="relative overflow-hidden rounded-2xl bg-orange-600 h-48 transition-transform duration-300 group-hover:scale-105">
+            <div class="absolute left-4 bottom-4 bg-white rounded-2xl px-4 py-2 shadow-lg">
+              <% first, last = (n[:name] || "").split(" ", 2) %>
+              <span class="block font-extrabold text-xl leading-tight"><%= first %></span>
+              <% if last.present? %>
+                <span class="block font-extrabold text-xl leading-tight"><%= last %></span>
+              <% end %>
+            </div>
+            <%= image_tag "reddut_mascot.svg",
+                  alt: n[:name],
+                  class: "absolute right-6 bottom-0 h-40 w-auto drop-shadow-xl transform-gpu rotate-6 translate-y-2" %>
+          </div>
+
+        <% elsif n[:type] == :pink_card %>
+          <!-- Pink background, single mascot waving -->
+          <div class="relative overflow-hidden rounded-2xl bg-pink-500 h-48 transition-transform duration-300 group-hover:scale-105">
+            <%= image_tag "reddut_mascot.svg",
+                  alt: n[:title],
+                  class: "absolute left-6 bottom-0 h-48 w-auto drop-shadow-lg transform-gpu -rotate-6" %>
+          </div>
+
+        <% elsif n[:type] == :yellow_card %>
+          <!-- Yellow background, two floating mascots -->
+          <div class="relative overflow-hidden rounded-2xl bg-yellow-400 h-48 transition-transform duration-300 group-hover:scale-105">
+            <!-- Big mascot bottom-left -->
+            <%= image_tag "reddut_mascot.svg",
+                  alt: n[:title],
+                  class: "absolute left-4 bottom-0 h-28 w-auto drop-shadow-lg transform-gpu -rotate-3" %>
+            <!-- Small mascot top-right -->
+            <%= image_tag "reddut_mascot.svg",
+                  alt: n[:title],
+                  class: "absolute right-6 top-4 h-20 w-auto drop-shadow-md transform-gpu rotate-6" %>
+          </div>
+
+        <% else %>
+          <!-- Fallback -->
+          <div class="overflow-hidden rounded-2xl">
+            <%= image_tag "comment.png",
+                  alt: n[:title],
+                  class: "h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105" %>
+          </div>
+        <% end %>
+
+        <!-- Title -->
+        <h3 class="mt-4 font-semibold text-lg leading-snug group-hover:text-orange-600">
+          <%= n[:title] %>
+        </h3>
+        <time class="mt-1 block text-sm text-gray-500">
+          <%= Date.parse(n[:date]).strftime("%B %-d, %Y") %>
+        </time>
+      </div>
+    <% end %>
+  </div>
+</section>
