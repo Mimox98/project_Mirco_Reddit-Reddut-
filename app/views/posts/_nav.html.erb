@@ -8,6 +8,16 @@
 
     <!-- Right: actions -->
     <div class="flex items-center gap-4">
+      <!-- Home -->
+      <%= link_to root_path,
+                  class: "inline-flex items-center gap-2 rounded-full px-3 py-1.5 bg-orange-500 text-gray-800 hover:bg-orange-600" do %>
+        <!-- home icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-4 w-4 fill-current" aria-hidden="true">
+          <path d="M10 2L2 8h2v8h4v-5h4v5h4V8h2L10 2z"/>
+        </svg>
+        <span>Home</span>
+      <% end %>
+
       <!-- Create -->
       <%= link_to new_post_path,
                   class: "inline-flex items-center gap-2 rounded-full px-3 py-1.5 bg-blue-600 text-white hover:bg-blue-700" do %>

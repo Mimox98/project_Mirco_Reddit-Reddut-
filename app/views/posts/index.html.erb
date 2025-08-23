@@ -8,16 +8,14 @@
 
   <div class="divide-y divide-gray-200">
     <% @posts.each do |post| %>
-    
       <article
         data-controller="voting"
         data-voting-post-id-value="<%= post.id %>"
-        class="py-4 space-y-2 hover:shadow-sm transition hover:bg-gray-100"
+        class="py-4 space-y-2 hover:shadow-sm transition hover:bg-gray-100 cursor-pointer"
+        onclick="if(!event.target.closest('button, a, .no-article-click')) { window.location='<%= post_path(post) %>' }"
       >
-      
         <!-- header -->
         <div class="flex items-center gap-2 text-sm text-gray-600">
-          <!-- avatar -->
           <span class="flex items-center justify-center w-6 h-6 rounded-full bg-gray-300 text-gray-700 text-xs font-bold">
             <%= post.user.Username[0].upcase %>
           </span>
@@ -29,28 +27,24 @@
         </div>
 
         <!-- title -->
-        <h3 class="text-lg font-semibold">
-          <%= link_to post.title, post_path(post), class: "hover:underline" %>
-        </h3>
+        <h3 class="text-lg font-semibold"><%= post.title %></h3>
 
         <!-- media/body -->
         <% if post.image_url.present? %>
-          <%= link_to post_path(post) do %>
-            <img
-              src="<%= post.image_url %>"
-              alt="<%= post.title %>"
-              class="rounded max-h-96 object-cover w-full mb-3" />
-          <% end %>
+          <img
+            src="<%= post.image_url %>"
+            alt="<%= post.title %>"
+            class="rounded max-h-96 object-cover w-full mb-3" />
         <% elsif post.body.present? %>
           <p class="text-gray-800 mb-3"><%= truncate(post.body, length: 240) %></p>
         <% end %>
 
         <!-- actions row -->
         <div class="flex items-center gap-3 text-sm">
-          <!-- Voting pill: ▲ score ▼ -->
+          <!-- Voting pill -->
           <div
             data-voting-target="pill"
-            class="inline-flex items-center gap-2 rounded-full px-3 py-1 bg-gray-100 text-gray-800 border"
+            class="inline-flex items-center gap-4 rounded-full px-3 py-2 bg-gray-100 text-gray-800 border "
           >
             <button
               data-voting-target="up"
@@ -70,8 +64,8 @@
           </div>
 
           <!-- Comments button -->
-          <%= link_to post_path(post),
-                      class: "inline-flex items-center gap-2 rounded-full px-3 py-1 bg-gray-100 text-gray-800 border hover:bg-gray-50" do %>
+          <%= link_to post_path(post, anchor: "comments"),
+                      class: "inline-flex items-center gap-4 rounded-full px-3 py-2 bg-gray-100 text-gray-800 border hover:bg-gray-50 no-article-click" do %>
             <span>💬</span>
             <span><%= pluralize(post.comments_count, "comment") %></span>
           <% end %>

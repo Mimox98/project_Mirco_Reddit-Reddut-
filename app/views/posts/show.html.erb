@@ -38,37 +38,51 @@
       <div class="prose max-w-none"><%= simple_format(@post.body) %></div>
     <% end %>
 
-    <!-- actions row -->
-    <div class="flex items-center gap-3 text-sm pt-1">
-      <!-- Voting pill: ▲ score ▼ (Stimulus targets) -->
-      <div
-        data-voting-target="pill"
-        class="inline-flex items-center gap-2 rounded-full px-3 py-1 bg-gray-100 text-gray-800 border"
-      >
-        <button
-          data-voting-target="up"
-          data-action="click->voting#voteUp"
-          class="leading-none"
-          aria-label="Upvote">▲</button>
+  <!-- actions row -->
+  <div class="flex items-center gap-3 text-sm pt-1">
+  <!-- Voting pill -->
+  <div
+    data-voting-target="pill"
+    class="inline-flex items-center gap-2 rounded-full px-3 py-1 bg-gray-100 text-gray-800 border"
+  >
+    <button
+      data-voting-target="up"
+      data-action="click->voting#voteUp"
+      class="leading-none"
+      aria-label="Upvote">▲</button>
 
-        <span data-voting-target="score" class="font-semibold">
-          <%= @post.score %>
-        </span>
+    <span data-voting-target="score" class="font-semibold">
+      <%= @post.score %>
+    </span>
 
-        <button
-          data-voting-target="down"
-          data-action="click->voting#voteDown"
-          class="leading-none"
-          aria-label="Downvote">▼</button>
-      </div>
+    <button
+      data-voting-target="down"
+      data-action="click->voting#voteDown"
+      class="leading-none"
+      aria-label="Downvote">▼</button>
+  </div>
 
-      <!-- Comments count -->
-      <div id="<%= dom_id(@post, :comments_count) %>"
-      class="inline-flex items-center gap-2 rounded-full px-3 py-1 bg-gray-100 text-gray-800 border">
-        <span>💬</span>
-        <span><%= pluralize(@post.comments_count, "comment") %></span>
-      </div>
+  <!-- Comments count -->
+  <div id="<%= dom_id(@post, :comments_count) %>"
+       class="inline-flex items-center gap-2 rounded-full px-3 py-1 bg-gray-100 text-gray-800 border">
+    <span>💬</span>
+    <span><%= pluralize(@post.comments_count, "comment") %></span>
+  </div>
+
+  <!-- Delete (owner only), pushed to far right -->
+  <% if current_user && @post.user == current_user %>
+    <div class="ml-auto">
+      <%= link_to "Delete",
+                  post_path(@post),
+                  data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Delete this post? This cannot be undone."
+                  },
+                  class: "inline-flex items-center gap-2 rounded-full px-3 py-1 border text-red-700 hover:bg-red-50" %>
     </div>
+  <% end %>
+</div>
+
   </article>
 
   <hr class="border-gray-200" />

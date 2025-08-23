@@ -1,8 +1,8 @@
 <%= render "posts/nav" %>
 
-<div class="max-w-3xl mx-auto p-4 space-y-6" data-controller="tabs">
+<div class="max-w-3xl mx-auto p-4 space-y-6">
   <div class="flex items-center justify-between">
-    <h1 class="text-2xl font-bold">Create post</h1>
+    <h1 class="text-2xl font-bold">New Post</h1>
   </div>
 
   <!-- Subreddit dropdown -->
@@ -23,28 +23,8 @@
     </div>
   </div>
 
-  <!-- Tabs -->
-  <div class="border-b">
-    <nav class="flex gap-6 text-sm">
-      <button
-        type="button"
-        data-action="tabs#showText"
-        data-tabs-target="tabTextBtn"
-        class="pb-2 border-b-2 border-blue-600 text-blue-700 font-medium">
-        Text
-      </button>
-      <button
-        type="button"
-        data-action="tabs#showImage"
-        data-tabs-target="tabImageBtn"
-        class="pb-2 border-b-2 border-transparent text-gray-600 hover:text-gray-800">
-        Images & Video
-      </button>
-    </nav>
-  </div>
-
-  <!-- Form (single form used by both tabs) -->
-  <%= form_with model: @post, url: posts_path, id: "post_form", html: { multipart: true }, class: "space-y-4" do |f| %>
+  <!-- Form -->
+  <%= form_with model: @post, url: posts_path, id: "post_form", class: "space-y-4" do |f| %>
     <!-- Title -->
     <div>
       <%= f.label :title, "Title", class: "sr-only" %>
@@ -54,31 +34,18 @@
       <div class="text-right text-xs text-gray-500 mt-1"><span data-tabs-target="titleCount">0</span>/300</div>
     </div>
 
-
-
-    <!-- TEXT TAB -->
-    <div data-tabs-target="textPanel" class="space-y-3">
+    <!-- Body -->
+    <div>
+      <%= f.label :body, "Body", class: "sr-only" %>
       <%= f.text_area :body, rows: 8, required: true,
-            placeholder: "Body text*",
+            placeholder: "Write your post...",
             class: "w-full rounded-2xl border px-4 py-3" %>
     </div>
 
-    <!-- IMAGE TAB -->
-    <div data-tabs-target="imagePanel" class="space-y-3 hidden">
-      <%= f.text_area :body, rows: 6,
-            placeholder: "Say something about your image (optional)",
-            class: "w-full rounded-2xl border px-4 py-3" %>
-
-      <!-- If using Active Storage -->
-      <div class="rounded-2xl border px-4 py-4">
-        <%= f.label :image, "Upload image", class: "block mb-2 font-medium" %>
-        <%= f.file_field :image, accept: "image/*", class: "block" %>
-      </div>
-
-      <!-- If you still use image_url instead of Active Storage, show this instead:
-      <%= f.label :image_url, "Image URL", class: "block mb-2 font-medium" %>
+    <!-- Image URL (optional) -->
+    <div class="rounded-2xl border px-4 py-4">
+      <%= f.label :image_url, "Image URL (optional)", class: "block mb-2 font-medium" %>
       <%= f.url_field :image_url, placeholder: "https://…", class: "w-full rounded border px-3 py-2" %>
-      -->
     </div>
 
     <div class="flex justify-end gap-2 pt-2">

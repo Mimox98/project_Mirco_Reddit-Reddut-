@@ -11,17 +11,8 @@
 
 u = User.first_or_create!(username: "DemoUser")
 
-# Post 1: job plea
-Post.create!(
-  user: u,
-  subreddit: "r/pleaseHireMeASAP",
-  title: "I need a job",
-  body: "please hire me I'm a good dedicated programmer",
-  image_url: ActionController::Base.helpers.asset_path("hire_me.jpg"),
-  score: 60
-)
 
-# Post 2: AI irony
+# Post 1: AI irony
 Post.create!(
   user: u,
   subreddit: "r/AiWIllTakeMyJob",
@@ -31,7 +22,7 @@ Post.create!(
   score: rand(10..40)
 )
 
-# Post 3: rant (text only)
+# Post 2: rant (text only)
 Post.create!(
   user: u,
   subreddit: "r/Ranting",
@@ -40,7 +31,7 @@ Post.create!(
   score: rand(5..25)
 )
 
-# Post 4: steuer satire
+# Post 3: steuer satire
 Post.create!(
   user: u,
   subreddit: "r/Steuergeld",
@@ -48,4 +39,14 @@ Post.create!(
   body: "At least it's responsive... kinda.",
   image_url: ActionController::Base.helpers.asset_path("spinning_cube.jpg"),
   score: rand(15..50)
+)
+
+# Post 4: job plea
+Post.create!(
+  user: u,
+  subreddit: "r/pleaseHireMeASAP",
+  title: "I need a job",
+  body: "please hire me I'm a good dedicated programmer",
+  image_url: ActionController::Base.helpers.asset_path("hire_me.jpg"),
+  score: 60
 )
