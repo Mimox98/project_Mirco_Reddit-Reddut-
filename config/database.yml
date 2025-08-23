@@ -14,6 +14,8 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  # Rely on DATABASE_URL provided by Render (includes adapter=postgres)
-  url: <%= ENV["DATABASE_URL"] %>
+  primary: &primary_production
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>  # Render Postgres
+  cable:
+    <<: *primary_production          # use the same DB for cable (simple + fine for demos)
