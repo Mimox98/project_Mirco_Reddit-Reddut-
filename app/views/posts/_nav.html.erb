@@ -1,0 +1,31 @@
+<!-- posts navbar -->
+<nav class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-b-gray-200">
+  <div class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
+    <!-- Left: Logo -->
+    <%= link_to posts_path, class: "flex items-center gap-2" do %>
+      <%= render "shared/reddut_logo", class_name: "h-12 w-auto" %>
+    <% end %>
+
+    <!-- Right: actions -->
+    <div class="flex items-center gap-4">
+      <!-- Create -->
+      <%= link_to new_post_path,
+                  class: "inline-flex items-center gap-2 rounded-full px-3 py-1.5 bg-blue-600 text-white hover:bg-blue-700" do %>
+        <!-- plus icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-4 w-4 fill-current" aria-hidden="true">
+          <path d="M9 3h2v6h6v2h-6v6H9v-6H3V9h6z"/>
+        </svg>
+        <span>Create</span>
+      <% end %>
+
+      <!-- User avatar with online dot -->
+      <div class="relative">
+        <span class="flex items-center justify-center h-8 w-8 rounded-full bg-gray-300 text-gray-700 text-sm font-bold">
+          <%= ((current_user&.Username) || "Guest")[0].upcase %>
+        </span>
+        <!-- green dot -->
+        <span class="absolute -right-0.5 -bottom-0.5 h-3 w-3 rounded-full bg-green-500 ring-2 ring-white"></span>
+      </div>
+    </div>
+  </div>
+</nav>

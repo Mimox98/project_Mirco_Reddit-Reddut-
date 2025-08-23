@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    @post = Post.new(subreddit: Post::SUBREDDITS.first)
   end
 
   def create

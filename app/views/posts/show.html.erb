@@ -1,4 +1,5 @@
 <!-- app/views/posts/show.html.erb -->
+<%= render "posts/nav" %>
 <div class="max-w-3xl mx-auto p-4 space-y-6">
   <div>
     <%= link_to "← Back", posts_path, class: "text-sm text-blue-600 hover:underline" %>
@@ -30,7 +31,7 @@
       <img
         src="<%= @post.image_url %>"
         alt="<%= @post.title %>"
-        class="rounded max-h-[30rem] object-cover w-full mb-3" />
+        class="rounded h-auto object-cover w-full mb-3" />
     <% end %>
 
     <% if @post.body.present? %>
