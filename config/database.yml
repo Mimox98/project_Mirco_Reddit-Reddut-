@@ -16,6 +16,8 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    url: <%= ENV["DATABASE_URL"] %>  # Render Postgres
+    url: <%= ENV["DATABASE_URL"] %>
   cable:
-    <<: *primary_production          # use the same DB for cable (simple + fine for demos)
+    <<: *primary_production
+  queue:
+    <<: *primary_production
