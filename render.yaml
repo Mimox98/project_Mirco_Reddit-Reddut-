@@ -5,7 +5,7 @@ services:
     plan: free
     buildCommand: ./bin/render-build.sh
     # preDeployCommand: "bin/rails db:migrate" # paid instances only
-    startCommand: ./bin/rails server
+    startCommand: bundle exec rails server -b 0.0.0.0 -p $PORT
     envVars:
       - key: DATABASE_URL
         fromDatabase:
