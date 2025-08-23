@@ -17,5 +17,5 @@ services:
         value: 2        # sensible default for free instances
 
 databases:
-  - name: my-rails-db
+  - name: my-Reddut-db
     plan: free
