@@ -1,0 +1,16 @@
+<!-- app/views/posts/_form.html.erb -->
+<%= form_with model: @post, local: true do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :subreddit %>
+  <%= f.select :subreddit, Post::SUBREDDITS %>
+
+  <%= f.label :body, "Text (optional)" %>
+  <%= f.text_area :body %>
+
+  <%= f.label :image_url, "Image URL (optional)" %>
+  <%= f.text_field :image_url %>
+
+  <%= f.submit %>
+<% end %>

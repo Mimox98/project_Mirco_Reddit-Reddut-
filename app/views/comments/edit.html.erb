@@ -1,0 +1,4 @@
+<!-- app/views/comments/edit.html.erb -->
+<%= turbo_frame_tag dom_id(@comment) do %>
+  <%= render "form", post: @post, comment: @comment %>
+<% end %>

@@ -1,0 +1,149 @@
+<!-- app/views/posts/show.html.erb -->
+<div class="max-w-3xl mx-auto p-4 space-y-6">
+  <div>
+    <%= link_to "← Back", posts_path, class: "text-sm text-blue-600 hover:underline" %>
+  </div>
+
+  <!-- Post -->
+  <article
+    data-controller="voting"
+    data-voting-post-id-value="<%= @post.id %>"
+    class="space-y-3"
+  >
+    <!-- header -->
+    <div class="flex items-center gap-2 text-sm text-gray-600">
+      <span class="flex items-center justify-center w-6 h-6 rounded-full bg-gray-300 text-gray-700 text-xs font-bold">
+        <%= @post.user.Username[0].upcase %>
+      </span>
+      <span class="font-medium"><%= @post.user.Username %></span>
+      <span>•</span>
+      <span>r/<%= @post.subreddit %></span>
+      <span>•</span>
+      <span><%= time_ago_in_words(@post.created_at) %> ago</span>
+    </div>
+
+    <!-- title -->
+    <h1 class="text-2xl font-bold"><%= @post.title %></h1>
+
+    <!-- media/body -->
+    <% if @post.image_url.present? %>
+      <img
+        src="<%= @post.image_url %>"
+        alt="<%= @post.title %>"
+        class="rounded max-h-[30rem] object-cover w-full mb-3" />
+    <% end %>
+
+    <% if @post.body.present? %>
+      <div class="prose max-w-none"><%= simple_format(@post.body) %></div>
+    <% end %>
+
+    <!-- actions row -->
+    <div class="flex items-center gap-3 text-sm pt-1">
+      <!-- Voting pill: ▲ score ▼ (Stimulus targets) -->
+      <div
+        data-voting-target="pill"
+        class="inline-flex items-center gap-2 rounded-full px-3 py-1 bg-gray-100 text-gray-800 border"
+      >
+        <button
+          data-voting-target="up"
+          data-action="click->voting#voteUp"
+          class="leading-none"
+          aria-label="Upvote">▲</button>
+
+        <span data-voting-target="score" class="font-semibold">
+          <%= @post.score %>
+        </span>
+
+        <button
+          data-voting-target="down"
+          data-action="click->voting#voteDown"
+          class="leading-none"
+          aria-label="Downvote">▼</button>
+      </div>
+
+      <!-- Comments count -->
+      <div id="<%= dom_id(@post, :comments_count) %>"
+      class="inline-flex items-center gap-2 rounded-full px-3 py-1 bg-gray-100 text-gray-800 border">
+        <span>💬</span>
+        <span><%= pluralize(@post.comments_count, "comment") %></span>
+      </div>
+    </div>
+  </article>
+
+  <hr class="border-gray-200" />
+
+  <!-- Comment composer -->
+<section class="space-y-3">
+  <%= form_with model: [@post, @comment], local: true do |f| %>
+    <div class="flex gap-3 items-start">
+      <!-- current_user avatar -->
+      <span class="flex items-center justify-center w-8 h-8 rounded-full bg-gray-300 text-gray-700 text-sm font-bold shrink-0">
+        <%= current_user.Username[0].upcase %>
+      </span>
+
+      <div class="flex-1">
+        <!-- pill-like input -->
+        <%= f.text_area :body,
+              rows: 3,
+              placeholder: "Join the conversation",
+              class: "w-full p-8 rounded-full border border-gray-300 bg-white/80 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y" %>
+
+        <div class="flex justify-end mt-6">
+          <%= f.submit "Comment",
+                class: "px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</section>
+
+<!-- Comments list -->
+<section class="space-y-6 mb-20">
+  <% if @comments.blank? %>
+    <p class="text-gray-600">Be the first to comment.</p>
+  <% end %>
+
+  <ul class="space-y-6">
+  <% @comments.each do |comment| %>
+    <li>
+      <%= turbo_frame_tag dom_id(comment) do %>
+        <div class="flex gap-3">
+          <!-- avatar -->
+          <span class="flex items-center justify-center w-8 h-8 rounded-full bg-gray-300 text-gray-700 text-sm font-bold shrink-0">
+            <%= comment.user.Username[0].upcase %>
+          </span>
+
+          <div class="flex-1">
+            <!-- header row -->
+            <div class="flex items-center gap-2 text-sm">
+              <span class="font-semibold text-gray-900"><%= comment.user.Username %></span>
+              <span class="text-gray-500">• <%= time_ago_in_words(comment.created_at) %> ago</span>
+            </div>
+
+            <!-- body -->
+            <div class="mt-2 pl-4 border-l border-gray-200">
+              <p class="text-gray-900 leading-relaxed"><%= comment.body %></p>
+            </div>
+
+            <!-- actions -->
+            <% if comment.user == current_user %>
+              <div class="mt-2 pl-4 text-xs text-gray-500">
+                <%= link_to "Edit",
+                            edit_post_comment_path(@post, comment),
+                            data: { turbo_frame: dom_id(comment) },
+                            class: "hover:underline mr-3" %>
+                <%= link_to "Delete",
+                            post_comment_path(comment.post, comment),
+                            data: { turbo_method: :delete, turbo_frame: "_top"},
+                            class: "hover:underline text-red-600" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+</section>
+</div>

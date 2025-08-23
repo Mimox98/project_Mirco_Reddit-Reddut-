@@ -1,0 +1,4 @@
+<!-- app/views/comments/update.turbo_stream.erb -->
+<%= turbo_stream.replace dom_id(@comment) do %>
+  <%= render "comments/comment", comment: @comment %>
+<% end %>

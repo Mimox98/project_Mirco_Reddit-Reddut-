@@ -1,0 +1,83 @@
+<!-- app/views/posts/index.html.erb -->
+<div class="max-w-3xl mx-auto p-4">
+  <div class="flex items-center justify-between mb-4">
+    <h1 class="text-2xl font-bold">Reddut</h1>
+    <%= link_to "New Post", new_post_path, class: "px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700" %>
+  </div>
+
+  <% if @posts.blank? %>
+    <p class="text-gray-600">No posts yet.</p>
+  <% end %>
+
+  <div class="divide-y divide-gray-200">
+    <% @posts.each do |post| %>
+      <article
+        data-controller="voting"
+        data-voting-post-id-value="<%= post.id %>"
+        class="py-4 space-y-2"
+      >
+        <!-- header -->
+        <div class="flex items-center gap-2 text-sm text-gray-600">
+          <!-- avatar -->
+          <span class="flex items-center justify-center w-6 h-6 rounded-full bg-gray-300 text-gray-700 text-xs font-bold">
+            <%= post.user.Username[0].upcase %>
+          </span>
+          <span class="font-medium"><%= post.user.Username %></span>
+          <span>•</span>
+          <span>r/<%= post.subreddit %></span>
+          <span>•</span>
+          <span><%= time_ago_in_words(post.created_at) %> ago</span>
+        </div>
+
+        <!-- title -->
+        <h3 class="text-lg font-semibold">
+          <%= link_to post.title, post_path(post), class: "hover:underline" %>
+        </h3>
+
+        <!-- media/body -->
+        <% if post.image_url.present? %>
+          <%= link_to post_path(post) do %>
+            <img
+              src="<%= post.image_url %>"
+              alt="<%= post.title %>"
+              class="rounded max-h-96 object-cover w-full mb-3" />
+          <% end %>
+        <% elsif post.body.present? %>
+          <p class="text-gray-800 mb-3"><%= truncate(post.body, length: 240) %></p>
+        <% end %>
+
+        <!-- actions row -->
+        <div class="flex items-center gap-3 text-sm">
+          <!-- Voting pill: ▲ score ▼ -->
+          <div
+            data-voting-target="pill"
+            class="inline-flex items-center gap-2 rounded-full px-3 py-1 bg-gray-100 text-gray-800 border"
+          >
+            <button
+              data-voting-target="up"
+              data-action="click->voting#voteUp"
+              class="leading-none"
+              aria-label="Upvote">▲</button>
+
+            <span data-voting-target="score" class="font-semibold">
+              <%= post.score %>
+            </span>
+
+            <button
+              data-voting-target="down"
+              data-action="click->voting#voteDown"
+              class="leading-none"
+              aria-label="Downvote">▼</button>
+          </div>
+
+          <!-- Comments button -->
+          <%= link_to post_path(post),
+                      class: "inline-flex items-center gap-2 rounded-full px-3 py-1 bg-gray-100 text-gray-800 border hover:bg-gray-50" do %>
+            <span>💬</span>
+            <span><%= pluralize(post.comments_count, "comment") %></span>
+          <% end %>
+        </div>
+      </article>
+    <% end %>
+  </div>
+</div>

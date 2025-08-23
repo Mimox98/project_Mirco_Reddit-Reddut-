@@ -1,0 +1,32 @@
+<!-- app/views/comments/_comment.html.erb -->
+<%= turbo_frame_tag dom_id(comment) do %>
+  <div class="flex gap-3">
+    <!-- avatar -->
+    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-gray-300 text-gray-700 text-sm font-bold shrink-0">
+      <%= comment.user.Username[0].upcase %>
+    </span>
+
+    <div class="flex-1">
+      <div class="flex items-center gap-2 text-sm text-gray-600">
+        <span class="font-medium text-gray-800"><%= comment.user.Username %></span>
+        <span>•</span>
+        <span><%= time_ago_in_words(comment.created_at) %> ago</span>
+      </div>
+
+      <p class="mt-2 pl-4 border-l border-gray-200 text-gray-900"><%= comment.body %></p>
+
+      <% if comment.user == current_user %>
+        <div class="mt-2 pl-4 text-xs text-gray-500">
+          <%= link_to "Edit",
+                      edit_post_comment_path(comment.post, comment),
+                      data: { turbo_frame: dom_id(comment) },
+                      class: "hover:underline mr-3" %>
+          <%= link_to "Delete",
+                      post_comment_path(comment.post, comment),
+                      data: { turbo_method: :delete, confirm: "Delete comment?" },
+                      class: "hover:underline text-red-600" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

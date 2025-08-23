@@ -1,0 +1,22 @@
+<!-- app/views/comments/_form.html.erb -->
+<% if comment.errors.any? %>
+  <div class="mb-2 rounded border border-red-300 bg-red-50 text-red-700 px-3 py-2 text-sm">
+    <%= comment.errors.full_messages.to_sentence %>
+  </div>
+<% end %>
+
+<%= form_with model: [post, comment],
+              data: { turbo_frame: dom_id(comment) },
+              class: "space-y-2" do |f| %>
+  <%= f.text_area :body,
+        rows: 3,
+        required: true,
+        placeholder: "Join the conversation",
+        class: "w-full p-3 border rounded" %>
+  <div class="flex gap-2">
+    <%= f.submit "Save", class: "px-3 py-1 bg-blue-600 text-white rounded" %>
+    <%= link_to "Cancel", post_path(post),
+          data: { turbo_frame: dom_id(comment) },
+          class: "px-3 py-1 border rounded" %>
+  </div>
+<% end %>

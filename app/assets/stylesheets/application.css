@@ -8,3 +8,8 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+/* tailwind layer (e.g., application.tailwind.css) */
+@layer components {
+  .upvote.selected   { @apply text-orange-500; }
+  .downvote.selected { @apply text-purple-500; }
+}
