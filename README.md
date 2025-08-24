@@ -2,7 +2,11 @@
 
 Reddut is a minimal Reddit-style app built with Ruby on Rails, Tailwind CSS, Stimulus, and Turbo. It provides a Reddit-like feed with posts from predefined subreddits, upvotes, and comments. There’s no real authentication yet—each distinct browser session transparently receives a random demo user so you can interact right away.
 
-Deployed on Render (free plan) — the database may sleep or reset.
+Deployed on Render (free plan) — the database may sleep or reset. Available at https://reddut-demo.onrender.com/ (feel free to add posts / comment on existing posts) 
+
+<img src="https://i.imgur.com/i5J3QJr.png" alt="Reddut demo" style="width:400px; border-radius:8px;">
+
+
 
 ## Table of contents
 
