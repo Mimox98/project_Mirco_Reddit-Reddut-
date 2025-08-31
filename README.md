@@ -229,4 +229,4 @@ Because the free DB can reset, keep seed data handy and don’t rely on persiste
 
 ## License
 
-MIT (or add your preferred license here).
+MIT.
