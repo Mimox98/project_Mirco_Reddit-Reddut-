@@ -5,7 +5,7 @@ gem "rails", "~> 8.0.2"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 group :development, :test do
-  gem "sqlite3", "~> 2.1"
+  gem "sqlite3", "~> 2.7"
 end
 group :production do
   gem "pg", ">= 1.5"
